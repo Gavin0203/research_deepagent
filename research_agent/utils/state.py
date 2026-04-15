@@ -1,0 +1,1 @@
+'''State management for the research agent. Place holder for now, but can be expanded in the future to include more complex state management if needed.'''
