@@ -14,6 +14,7 @@ The Deep Research Agent is an autonomous system that breaks down complex researc
 - **Structured Reports**: Generates well-organized final reports with citations
 - **Interactive UI**: Streamlit-based web interface for easy interaction
 - **Workflow Management**: Intelligent task planning and synthesis of findings
+- **LangSmith Tracing**: Full observability and monitoring of agent execution with detailed trace logs
 
 ## Project Structure
 
@@ -42,6 +43,7 @@ The Deep Research Agent is an autonomous system that breaks down complex researc
 - API Keys:
   - Claude API key (Anthropic)
   - Tavily Search API key
+  - LangSmith API key (optional, for tracing and monitoring)
 
 ## Installation
 
@@ -71,6 +73,12 @@ The Deep Research Agent is an autonomous system that breaks down complex researc
    ```
    ANTHROPIC_API_KEY=your_claude_api_key
    TAVILY_API_KEY=your_tavily_api_key
+   
+   # Optional: LangSmith tracing for agent monitoring
+   LANGSMITH_API_KEY=your_langsmith_api_key
+   LANGSMITH_TRACING=true
+   LANGSMITH_PROJECT=Deep Research Agent (Should be created before adding the trace)
+   LANGSMITH_ENDPOINT=https://api.smith.langchain.com
    ```
 
 ## Usage
@@ -166,6 +174,38 @@ Model, temperature, and other settings can be adjusted in `agent.py`:
 ```python
 model = init_chat_model(model="claude-sonnet-4-6", temperature=0.0, streaming=False)
 ```
+
+### LangSmith Tracing
+
+LangSmith integration provides full observability into agent execution. When enabled, all agent runs, tool calls, and sub-agent interactions are tracked and logged.
+
+**Enable LangSmith Tracing:**
+
+Set these environment variables in your `.env` file:
+
+```
+LANGSMITH_API_KEY=your_langsmith_api_key
+LANGSMITH_TRACING=true
+LANGSMITH_PROJECT=Deep Research Agent (Project should be created before sending traces.)
+LANGSMITH_ENDPOINT=https://api.smith.langchain.com
+```
+
+**Benefits:**
+
+- **Execution Traces**: Detailed logs of every step in the research process
+- **Sub-Agent Monitoring**: Track hierarchical agent interactions and delegation
+- **Performance Metrics**: Identify bottlenecks and optimize research parameters
+- **Debugging**: Review complete execution history for troubleshooting
+- **Project Organization**: All traces organized under "Deep Research Agent" project in LangSmith
+
+**Access LangSmith Dashboard:**
+
+1. Go to https://smith.langchain.com
+2. Sign in with your LangSmith account
+3. Navigate to the "Deep Research Agent" project
+4. View traces, analyze performance, and inspect agent interactions
+
+Once `LANGSMITH_TRACING=true`, traces will be automatically captured during both CLI and Streamlit runs.
 
 ## Output
 

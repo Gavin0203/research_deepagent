@@ -1,5 +1,8 @@
 from langchain.messages import HumanMessage
 from agent import agent
+import dotenv
+
+dotenv.load_dotenv()
 
 if __name__ == "__main__":
     response = agent.invoke(
